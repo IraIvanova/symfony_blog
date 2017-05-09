@@ -1,0 +1,22 @@
+{% extends '@Admin/layout.html.twig' %}
+
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block body %}
+
+    <article class="blog">
+        <header>
+            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+            <h2>{{ blog.title }}</h2>
+        </header>
+        <img src="/images/{{ blog.image}}" alt="{{ blog.title }} image not found" class="large" />
+        <div>
+            <p>{{ blog.blog }}</p>
+        </div>
+    </article>
+    <a href="{{ path('blog_admin.blog_list') }}"><h3>Вернуться назад</h3></a>
+
+
+
+{% endblock %}

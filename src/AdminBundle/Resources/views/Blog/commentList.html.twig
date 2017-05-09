@@ -1,0 +1,27 @@
+{% extends '@Admin/layout.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('blog_admin.blog_list') }}"><h3>Вернуться назад</h3></a>
+    <section class="comments" id="comments">
+    <section class="previous-comments">
+
+    {% for comment in commentList %}
+        <h3>Комментарии к <a href="{{ path('blog_admin.single_blog_text', {'id': comment.blog.id }) }}">{{ comment.blog.title }}</a></h3>
+        {% endfor %}
+
+
+{% for comment in commentList %}
+
+    <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+    <header>
+        <p><span class="highlight">{{ comment.blogUser }}</span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y') }}</time></p>
+    </header>
+    <p>{{ comment.comment }}</p>
+        <br>
+        <a href="{{ path('blog.delete_comment', {'id': comment.id, 'blog_id': comment.blog.id}) }}">Удалить</a>
+    </article>
+
+{% endfor %}
+    </section>
+    </section>
+{% endblock %}

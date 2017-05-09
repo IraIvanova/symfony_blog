@@ -1,0 +1,11 @@
+{% for comment in comments %}
+    <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+        <header>
+            <p><span class="highlight">{{ comment.blogUser }}</span> написал в <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y') }}</time></p>
+        </header>
+        <p>{{ comment.comment }}</p>
+        <a href="{{ path('blog.edit_comment', {'blog_id': comment.blog.id, 'id': comment.id }) }}">Редактировать</a>
+    </article>
+{% else %}
+    <p>Комментариев пока нет. Станьте первым...</p>
+{% endfor %}

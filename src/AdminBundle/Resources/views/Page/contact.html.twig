@@ -1,0 +1,38 @@
+{% extends '@Admin/layout.html.twig' %}
+
+{% block title %}Contact{% endblock%}
+
+{% block body %}
+    <header>
+        <h1>Contact symblog</h1>
+    </header>
+
+    <p>Want to contact symblog?</p>
+    {#<form action="{{ path('blog.page_contact') }}" method="post" >#}
+
+        {#{{ form_widget(form) }}#}
+      {##}
+
+        {#<input type="submit" />#}
+    {#</form>#}
+    {{ form_start(form, { 'action': path('blog.page_contact'), 'method': 'POST', 'attr': {'class': 'blogger'} }) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.subject) }}
+    {{ form_row(form.body) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="Submit" />
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <b style="color: green">{{ flash_message }}</b>
+    {% endfor %}
+
+    {% for flash_message in app.session.flashBag.get('error') %}
+        <b style="color: red">{{ flash_message }}</b>
+    {% endfor %}
+
+
+{% endblock %}

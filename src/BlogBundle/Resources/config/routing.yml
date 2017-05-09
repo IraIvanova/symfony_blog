@@ -1,0 +1,59 @@
+blog_homepage:
+    path:     /{page}
+    defaults: { _controller: BlogBundle:Default:index, page: 1 }
+    requirements:
+        page: \d+
+
+blog.page_about:
+    path:  /about
+    defaults: { _controller: AdminBundle:Page:pageAbout }
+
+blog.page_contact:
+    path: /contact
+    defaults: { _controller: AdminBundle:Page:contact }
+
+blog.single_blog:
+    path: /blog/{id}/full
+    defaults: { _controller: BlogBundle:Default:singleBlog}
+
+blog.user_registration:
+    path: /blog/user/registration
+    defaults: { _controller: BlogBundle:BlogUser:registration }
+
+blog.user_login:
+    path: /blog/user/login
+    defaults: { _controller: BlogBundle:BlogUser:login }
+
+blog.user_logout:
+    path: /blog/user/logout
+
+blog.add_comment:
+    path: /blog/{blog_id}/add/comment
+    defaults: { _controller: BlogBundle:Comment:add }
+    requirements:
+        blog_id: \d+
+
+blog.get_tags:
+    path: /sidebar
+    defaults: { _controller: BlogBundle:Default:sidebar }
+
+blog.test:
+    path: /test/{tag}
+    defaults: { _controller: BlogBundle:Default:test }
+
+blog.edit_comment:
+    path: /blog/{blog_id}/comment/{id}/edit
+    defaults: { _controller: BlogBundle:Comment:edit }
+    requirements:
+        id: \d+
+        blog_id: \d+
+
+blog.delete_comment:
+    path: blog/{blog_id}/comment/{id}/delete
+    defaults: { _controller: BlogBundle:Comment:delete }
+    requirements:
+        id: \d+
+
+blog.blog_by_tags:
+    path: /blogs/{tag}
+    defaults: { _controller: BlogBundle:Default:blogsByTag}

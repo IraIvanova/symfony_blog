@@ -1,0 +1,5 @@
+services:
+    myblog.image_check:
+        class: AdminBundle\ImageChecker\ImageCheck
+        arguments:
+            - "%support_image_type_list%"

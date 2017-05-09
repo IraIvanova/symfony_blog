@@ -1,0 +1,14 @@
+{#<form method="post" action="{{ path('blog.add_comment', {'blog_id': comment.blog.id , 'attr': {'class': 'blogger'}} )  }}">#}
+    {#{{ form_errors(form) }}#}
+
+    {#{{ form_row(form.comment) }}#}
+
+    {#<input type="submit" />#}
+{#</form>#}
+
+{{ form_start(form, { 'action': path('blog.add_comment', {'blog_id': comment.blog.id }), 'method': 'POST', 'attr': {'class': 'blogger'} }) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.comment) }}
+      {{ form_rest(form) }}
+
+<input type="submit" value="Написать" />

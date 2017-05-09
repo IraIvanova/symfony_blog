@@ -1,0 +1,64 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        AdminBundle\Entity\User: bcrypt
+        BlogBundle\Entity\BlogUser: bcrypt
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        db_provider:
+            entity:
+                class: AdminBundle\Entity\User
+                property: username
+
+        blog_user_db_provider:
+            entity:
+                class: BlogBundle\Entity\BlogUser
+                property: username
+
+
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: /admin/*
+            provider: db_provider
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: /logout
+                target: /
+
+        blog:
+            provider: blog_user_db_provider
+            anonymous: ~
+            form_login:
+                login_path: blog.user_login
+                check_path: blog.user_login
+            logout:
+                path: blog.user_logout
+                target: /
+
+
+            # activate different ways to authenticate
+
+            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            #form_login: ~
+    access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/blog/user, roles: ROLE_USER }
+
+

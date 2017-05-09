@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+    <title>{% block title %}Symblog{% endblock %} - Symblog</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block stylesheets %}
+        <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
+        <link href="{{ asset('bundles/blog/css/screen.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/blog/css/blog.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/blog/css/blog.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/blog/css/sidebar.css') }}" type="text/css" rel="stylesheet" />
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+
+<section id="wrapper">
+    <header id="header">
+        <div class="top">
+            {% block navigation %}
+                <nav>
+                    <ul class="navigation">
+
+                        <li><a href="{{  path('blog_admin.blog_create') }}">Создать новый блог</a></li>
+                        <li><a href="{{  path('blog_admin.blog_list') }}">Все статьи</a></li>
+                        <li><a href="">Страницы</a></li>
+
+                        {#<li><a href="{{ path('blog.page_about') }}">О нас</a></li>#}
+                        {#<li><a href="{{  path('blog.page_contact') }}">Контакты</a></li>#}
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li><a href="{{ path('blog.user_logout') }}">Выход</a></li>
+                        {% else %}
+                            <li><a href="{{ path('blog.user_login') }}">Войти</a></li>
+
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endblock %}
+        </div>
+
+        <hgroup>
+            <h2>{% block blog_title %}<a href="{{ path('blog_homepage') }}">Хороший блог</a>{% endblock %}</h2>
+            <h3>{% block blog_tagline %}<a href="{{ path('blog_homepage') }}">creating a blog in Symfony2</a>{% endblock %}</h3>
+            <h3>Hello,admin!</h3>
+        </hgroup>
+    </header>
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <div class="blogger-notice">
+            <b style="color: green">{{ flash_message }}</b>
+        </div>
+    {% endfor %}
+
+    {% for flash_message in app.session.flashBag.get('error') %}
+        <div class="blogger-notice">
+            <b style="color: red">{{ flash_message }}</b>
+        </div>
+    {% endfor %}
+
+
+        {% block body %}{% endblock %}
+</section>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

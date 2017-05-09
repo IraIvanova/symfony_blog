@@ -1,0 +1,52 @@
+{% extends '@Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <h2> Все статьи:</h2>
+    <br><br>
+<table  style="width: 100%">
+    <tr >
+        <th >
+           Название блога
+        </th>
+        <th valign="top">
+            Автор
+        </th>
+
+        <th>
+            Количесто комментариев
+        </th>
+        <th>
+            Дата создания
+        </th>
+        <th>
+            Действия
+        </th>
+    </tr>
+    {% for blog in blogList %}
+<tr>
+    <td >
+        <a href="{{ path('blog_admin.single_blog_text', {id:blog.id}) }}"> {{ blog.title }}</a>
+    </td>
+    <td style="background-color:#ccc">
+        {{ blog.author }}
+    </td>
+
+    <td>
+        <a href="{{ path('blog_admin.comment_list', {'blog_id': blog.id}) }}">{{ render(controller('AdminBundle:Blog:commentCount', {'blog_id': blog.id} ))}}</a>
+    </td>
+    <td style="background-color:#ccc">
+        {{ blog.created.format("H:i d.m.Y") }}
+    </td>
+    <td>
+
+        <a href="{{ path('blog_admin.blog_edit', {id:blog.id}) }}">Редактировать</a><br>
+        <a href="{{ path('blog_admin.blog_delete', {id:blog.id}) }}">Удалить</a>
+    </td>
+</tr>
+    {% endfor %}
+
+</table>
+<br><br>
+    <h2>Всего записей:{{ blogList|length }}</h2>
+{% endblock %}

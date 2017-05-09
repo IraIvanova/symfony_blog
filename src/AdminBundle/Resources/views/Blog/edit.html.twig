@@ -1,0 +1,9 @@
+{% extends '@Admin/layout.html.twig' %}
+
+{% block body %}
+    <h3>Редактирование блога</h3>
+    <form method="post" enctype="multipart/form-data" action="{{ path('blog_admin.blog_edit', {id:blog.id}) }}">
+        {{ form_widget(form) }}
+        <input type="submit" />
+    </form>
+{% endblock %}

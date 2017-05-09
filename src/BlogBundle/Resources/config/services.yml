@@ -1,0 +1,8 @@
+services:
+    myblog.mail_sender:
+        class: BlogBundle\Utils\MailSender
+        arguments:
+            - "@mailer"
+
+
+

@@ -1,0 +1,19 @@
+{% extends '@Blog/base.html.twig' %}
+
+{% block body %}
+    <fieldset>
+        <h2>Войти:</h2>
+
+        <form method="post" action="{{ path('blog.user_login') }}" >
+
+            Email:
+            <input name="_username" value="" type="text"><br>
+            Пароль:
+            <input name="_password" type="password"><br>
+            <button type="submit">Войти</button>
+
+
+        </form>
+    </fieldset>
+    <a href="{{ path('blog.user_registration') }}">Регистрация</a>
+{% endblock %}

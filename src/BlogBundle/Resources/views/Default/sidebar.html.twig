@@ -1,0 +1,36 @@
+
+<section class="section">
+    <header>
+        <h3>Облако тэгов</h3>
+    </header>
+    <p class="tags">
+        {% for tag in tagsArray %}
+        <a  href="{{ path('blog.blog_by_tags', {'tag': tag }) }}" >{{ tag }}</a>
+
+        {% else %}
+    <p>Тэгов нет</p>
+    {% endfor %}
+    </p>
+</section>
+
+<section class="section">
+    <header>
+        <h3>Последние комментарии</h3>
+    </header>
+    {% for comment in latestComments %}
+        <article class="comment">
+            <header>
+                <p class="small"><span class="highlight">{{ comment.blogUser }}</span> написал в
+                    <a href="{{ path('blog.single_blog', { 'id': comment.blog.id }) }}#comment-{{ comment.id }}">
+                         {{ comment.blog.title }}
+                    </a>
+                    [<em><time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('Y-m-d h:iA') }}</time></em>]
+                </p>
+            </header>
+            <p>{{ comment.comment }}</p>
+            </p>
+        </article>
+    {% else %}
+        <p>Пока нет комментариев</p>
+    {% endfor %}
+</section>

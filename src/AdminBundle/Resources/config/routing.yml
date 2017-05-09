@@ -1,0 +1,46 @@
+login:
+    path: /login
+    defaults: { _controller: AdminBundle:Login:login }
+
+admin_blog.user_add:
+    path: /user/add
+    defaults: { _controller: AdminBundle:User:add }
+
+blog_admin.blog_create:
+    path: /blog/create
+    defaults: { _controller: AdminBundle:Blog:add }
+
+blog_admin.blog_edit:
+    path: /blog/{id}/edit
+    defaults: { _controller: AdminBundle:Blog:edit }
+    requirements:
+        id: \d+
+
+blog_admin.blog_delete:
+    path: /blog/{id}/delete
+    defaults: { _controller: AdminBundle:Blog:delete }
+    requirements:
+         id: \d+
+
+blog_admin.author_create:
+    path: author/create
+    defaults: { _controller: AdminBundle:Author:add }
+
+blog_admin.blog_list:
+    path: /
+    defaults: { _controller: AdminBundle:Blog:index }
+
+blog_admin.single_blog:
+    path: /blog/{id}/full
+    defaults: { _controller: BlogBundle:Default:singleBlog}
+
+blog_admin.comment_list:
+    path: /blog/{blog_id}/comment
+    defaults: { _controller: AdminBundle:Blog:commentList }
+    requirements:
+         id: \d+
+
+blog_admin.single_blog_text:
+    path: /blog/{id}/content
+    defaults: { _controller: AdminBundle:Blog:singleBlog}
+

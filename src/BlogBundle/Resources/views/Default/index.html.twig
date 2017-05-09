@@ -1,0 +1,31 @@
+{% extends '@Blog/base.html.twig' %}
+
+{% block body %}
+
+    {% for blog in blogList %}
+        <article class="blog">
+            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+            <header>
+                <h2><a href="{{ path('blog.single_blog', { 'id': blog.id }) }}">{{ blog.title }}</a></h2>
+            </header>
+
+            <img src="/images/{{ blog.image }}" />
+            <div class="snippet">
+                <p>{{ blog.blog |slice (0,700) | raw}}...</p>
+                <p class="continue"><a href="{{ path('blog.single_blog', { 'id': blog.id }) }}">Посмотреть полностью...</a></p>
+            </div>
+
+            <footer class="meta">
+                <p>Комментарии:{{ blog.comments|length }}</p>
+                <p>Автор: <span class="highlight">{{blog.author}}</span> at {{ blog.created|date('h:iA') }}</p>
+                <p>Тэги: <span class="highlight">{{ blog.tags }}</span></p>
+            </footer>
+        </article>
+
+    {% else %}
+        <p>К сожалению нет записей </p>
+    {% endfor %}
+{{ knp_pagination_render(blogList) }}
+{% endblock %}
+
+
